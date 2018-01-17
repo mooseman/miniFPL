@@ -1,0 +1,39 @@
+
+area r = pi * r ^ 2
+
+areaRect l w = l * w
+
+map (+7) [3,8,15] 
+
+x = 42 
+
+sq :: num -> num 
+sq n = n * n 
+
+mylist = ["foo", "bar", "baz"] 
+
+mytuple = (123, "foo", ["a list"] )
+
+fib 0 = 0
+fib 1 = 1 
+fib (n+2) = fib (n+1) + fib n 
+
+fst (a,b) = a
+snd (a,b) = b
+
+vowel = member ['a', 'e', 'i', 'o', 'u']
+digit = member ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+/* List comprehensions */ 
+[ n*n | n <- [1..100] ] 
+
+
+/* Note - this is Haskell syntax for guards. */ 
+describeLetter :: Char -> String
+describeLetter c
+   | c >= 'a' && c <= 'z' = "Lower case"
+   | c >= 'A' && c <= 'Z' = "Upper case"
+   | otherwise            = "Not an ASCII letter"
+
+
+

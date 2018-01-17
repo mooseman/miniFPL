@@ -1,7 +1,7 @@
 
 
-/* minihope_file.c  */ 
-/* A lexer for a subset of the Hope language.  */
+/* minifpl_file.c  */ 
+/* A lexer for a small FP language.  */
 
 /* This code is released to the public domain. */ 
 /* "Share and enjoy......"  :)     */ 
@@ -13,7 +13,7 @@
 #include <stdlib.h>
 
 
-#define NUMBER_OF_KEYWORDS 23 
+#define NUMBER_OF_KEYWORDS 51 
 #define MAXLEN 80    // Maximum length of a token. 
 
 
@@ -23,13 +23,19 @@ void parse(char token[],  char *toktype);
 
 /* Array of our keywords in string form. */ 
 char *kw_strings[] = { 
-   "abstype", "data", "dec", "display", "else", 
-   "edit", "exit", "if", "in", "infix", "infixr", 
-   "lambda", "let", "letrec", "private", "save",  
-   "then", "type", "typevar", "uses", "where", 
-   "whererec", "write" 
+   "all", "and", "append", "as",
+   "case", "char", "code", "cons", "digit", "do", "drop",  
+   "dropwhile", "else", "filter", "forall" 
+   "from", "function", "hd", "if", "in", 
+   "interleave", "intersection", "iterate", 
+   "length", "let", "letter", "list", "listdiff",       
+   "map", "member", "not", "of", "otherwise", 
+   "print", "punct",  "reverse", "show", "some", 
+   "spaces", "take", "takewhile", "then",  "tl", 
+   "type", "until", "where",  "while",  "zeroplus", 
+   "oneplus", "zero_one", "zip"                
   } ; 
-   
+         
     
 /*  Search function to search the array of keywords. */ 
 int search(char *arr[], int dim, char *str) { 

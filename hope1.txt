@@ -1,3 +1,0 @@
-dec max : num # num -> num ; 
---- max ( x, y ) <= if x > y then x else y ; 
-
