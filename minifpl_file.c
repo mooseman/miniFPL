@@ -25,7 +25,7 @@ void parse(char token[],  char *toktype);
 char *kw_strings[] = { 
    "all", "and", "append", "as",
    "case", "char", "code", "cons", "digit", "do", "drop",  
-   "dropwhile", "else", "filter", "forall" 
+   "dropwhile", "else", "filter", "forall",
    "from", "function", "hd", "if", "in", 
    "interleave", "intersection", "iterate", 
    "length", "let", "letter", "list", "listdiff",       
