@@ -1,0 +1,74 @@
+
+/* BNF grammar - miniFPL  */ 
+
+
+program :=  +stmt  
+
+stmt    :=  assignment 
+        |   data_stmt 
+        |   map_stmt 
+        |   filter_stmt        
+        |   is_alpha_stmt 
+        |   is_digit_stmt
+        |   is_alnum_stmt 
+        |   is_punct_stmt 
+        |   is_space_stmt 
+        |   head_stmt 
+        |   tail_stmt 
+        |   elem_stmt     
+        |   in_stmt     
+  
+
+assignment  :=  variable = value 
+
+data_stmt   ( see https://wiki.haskell.org/Type )   
+
+map_stmt  :=  map function list 
+
+filter_stmt  :=  filter function list 
+
+is_alpha_stmt  :=  is_alpha list_element
+
+is_digit_stmt  :=  is_digit list_element 
+
+is_alnum_stmt  :=  is_alnum list_element
+
+is_punct_stmt  :=  is_punct list_element
+
+is_space_stmt  :=  is_space list_element
+
+head_stmt      :=  HEAD list 
+
+tail_stmt      :=  TAIL list 
+
+elem_stmt      :=  ELEM list 
+
+in_stmt        :=  IN list 
+
+variable       :=  identifier  
+
+identifier     :=  IDENT  
+
+value          :=  integer | char | string | list 
+
+list_element   :=  integer | char | string 
+
+list           :=  empty_list 
+               |   one_elem_list 
+               |   multi_elem_list 
+
+empty_list     :=  [] 
+
+one_elem_list  :=  [ list_element ] 
+
+multi_elem_list  :=  [ list_element , +list_element ] 
+
+
+
+
+
+
+
+
+
+     
