@@ -2,7 +2,7 @@
 /* BNF grammar - miniFPL  */ 
 
 
-program :=  +stmt  
+program :=  +stmt SEMICOLON    
 
 stmt    :=  assignment 
         |   data_stmt 
@@ -19,31 +19,31 @@ stmt    :=  assignment
         |   in_stmt     
   
 
-assignment  :=  variable = value 
+assignment  :=  variable = value ;
 
 data_stmt   ( see https://wiki.haskell.org/Type )   
 
-map_stmt  :=  map function list 
+map_stmt  :=  map function list ;
 
-filter_stmt  :=  filter function list 
+filter_stmt  :=  filter function list ;
 
-is_alpha_stmt  :=  is_alpha list_element
+is_alpha_stmt  :=  is_alpha list_element ; 
 
-is_digit_stmt  :=  is_digit list_element 
+is_digit_stmt  :=  is_digit list_element ;
 
-is_alnum_stmt  :=  is_alnum list_element
+is_alnum_stmt  :=  is_alnum list_element ;
 
-is_punct_stmt  :=  is_punct list_element
+is_punct_stmt  :=  is_punct list_element ; 
 
-is_space_stmt  :=  is_space list_element
+is_space_stmt  :=  is_space list_element ;
 
-head_stmt      :=  HEAD list 
+head_stmt      :=  HEAD list ;
 
-tail_stmt      :=  TAIL list 
+tail_stmt      :=  TAIL list ;
 
-elem_stmt      :=  ELEM list 
+elem_stmt      :=  ELEM list ;
 
-in_stmt        :=  IN list 
+in_stmt        :=  IN list ;
 
 variable       :=  identifier  
 
@@ -62,6 +62,8 @@ empty_list     :=  []
 one_elem_list  :=  [ list_element ] 
 
 multi_elem_list  :=  [ list_element , +list_element ] 
+
+SEMICOLON      :=   ';'  
 
 
 
