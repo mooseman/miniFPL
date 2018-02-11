@@ -4,10 +4,7 @@
 
 program :=  +stmt SEMICOLON    
 
-stmt    :=  assignment 
-        |   data_stmt 
-        |   map_stmt 
-        |   filter_stmt        
+stmt    :=  assignment        
         |   is_alpha_stmt 
         |   is_digit_stmt
         |   is_alnum_stmt 
@@ -15,17 +12,16 @@ stmt    :=  assignment
         |   is_space_stmt 
         |   head_stmt 
         |   tail_stmt 
-        |   elem_stmt     
+        |   elem_stmt  
+        |   if_then_stmt 
+        |   elif_stmt
+        |   else_stmt 
+        |   pass_stmt 
         |   in_stmt     
-  
+        |   compar_stmt    
+    
 
 assignment  :=  variable = value ;
-
-data_stmt   ( see https://wiki.haskell.org/Type )   
-
-map_stmt  :=  map function list ;
-
-filter_stmt  :=  filter function list ;
 
 is_alpha_stmt  :=  is_alpha list_element ; 
 
@@ -43,9 +39,21 @@ tail_stmt      :=  TAIL list ;
 
 elem_stmt      :=  ELEM list ;
 
-in_stmt        :=  IN list ;
+if_stmt        :=  IF compar_stmt THEN assignment ( elif_stmt | else_stmt ) ; 
+
+elif_stmt      :=  ELIF compar_stmt THEN assignment ( elif_stmt | else_stmt ) ; 
+
+else_stmt      :=  ELSE assignment | pass_stmt ; 
+
+pass_stmt      :=  PASS ; 
+
+in_stmt        :=  IN list ;  
+
+compar_stmt    :=  variable OP value 
 
 variable       :=  identifier  
+
+OP             :=  < > == <= >= != 
 
 identifier     :=  IDENT  
 

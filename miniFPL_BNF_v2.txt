@@ -1,0 +1,67 @@
+
+/* BNF grammar - miniFPL  */ 
+
+
+program :=  +stmt SEMICOLON    
+
+stmt    :=  assignment     
+        |   function_stmt     
+        |   if_stmt 
+        |   case_stmt      
+        |   print_stmt  
+    
+
+assignment  :=  simple_assignment | function_assignment ; 
+
+simple_assignment :=   variable = value ;
+
+function_assignment  :=  variable = function( value | list ) ;  
+
+function_stmt        :=  type_decl function_body ; 
+
+type_decl            :=  func_name :  +arg_type -> return_type ;   // Type declaration is mandatory 
+
+func_name            :=  identifier ;  
+
+arg_type             :=  type ( -> type ) 
+
+return_type          :=  type 
+
+function_body        :=  +stmt | guard_statements ; 
+
+guard_statements     :=  |  condition = value ;  
+
+if_stmt              :=  IF (condition) THEN true_value ELSE false_value ;   // As in Haskell, else is mandatory 
+
+condition            :=  comparison | in_statement ; 
+
+comparison           :=  variable OP value ;  
+
+in_statement         :=  variable IN list_of_values ;   
+
+case_stmt            :=  CASE variable OF +(case_body) otherwise_stmt ;  
+
+case_body            :=  variable_value ->  result_value ; 
+
+otherwise_stmt       :=  OTHERWISE value ;  
+
+variable_value       :=  value ; 
+
+result_value         :=  value ;  
+
+type                 :=  bool | integer | float | character | string | list     
+
+print_stmt     :=  PRINT value ; 
+
+value          :=  atomic_value | list ; 
+
+atomic_value   :=  character | string | bool | integer | float ; 
+
+list           :=  [ *atomic_value ] ; 
+
+
+
+Functions - will include is_alpha, is_digit, is_alnum, 
+is_punct, is_space, head, tail, elem, unlines, lines, 
+filter, map, min, max, mean, median, length, take, drop.  
+     
