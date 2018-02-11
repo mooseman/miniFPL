@@ -126,9 +126,27 @@ func_body
     : stmt+ 
     ; 
 
+parameter
+    : identifier 
+    ; 
 
+parameters 
+    : parameter 
+    | parameters parameter 
+    ; 
 
+guarded_func_body
+    : func_name parameters NL guard_statements
+    ; 
 
+guard_statement 
+    : '|' comparison '=' value 
+    ;    
+
+guard_statements 
+    : guard_statement 
+    | guard_statements NL guard_statement 
+    ; 
 
 
 
