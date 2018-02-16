@@ -1,8 +1,8 @@
 
 
-area r = pi * r ^ 2
+area r = pi * r ^ 2 ; 
 
-areaRect l w = l * w
+areaRect l w = l * w ; 
 
 map (+7) [3,8,15] 
 

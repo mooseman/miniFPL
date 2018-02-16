@@ -18,6 +18,19 @@ void count(void);
 %}
 
 %%
+
+[0-9]+      { 
+             yylval = atoi(yytext); 
+             return INTEGER;
+            }  
+
+
+[a-zA-Z_][a-zA-Z_][0-9]  { return IDENTIFIER;  } 
+ 
+\"([^\\\"]|\\.)*\"       { return STRING_LITERAL; }  
+
+
+
 "/*"			    { comment(); }
 "//"[^\n]*          { /* double-slash comment */   }
 
@@ -31,9 +44,6 @@ void count(void);
 "=="			    { count();  return(EQ);    }
 "!="			    { count();  return(NE);    }
 ";"                 { count();  return(';');   }
-
-"::"                { count();  return(DBL_COLON);   } 
-"->"                { count();  return(RIGHT_ARROW); } 
 "="                 { count();  return('='); }
 "<"			        { count();  return('<'); }
 ">"                 { count();  return('>'); }
