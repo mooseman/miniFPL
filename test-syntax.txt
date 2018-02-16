@@ -1,0 +1,20 @@
+
+
+square :: int -> int ; 
+square x = x * x ; 
+
+
+myfunc :: int -> string ; 
+
+myfunc x = case x of 
+   < 0 ->  "less than zero" ;
+    0  ->  "zero" ;
+   > 0 ->  "greater than zero" ;     
+
+
+foo :: int -> int -> int ;  
+  
+foo x = case x of 
+   5..10  
+
+  

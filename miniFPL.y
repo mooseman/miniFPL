@@ -2,177 +2,112 @@
 
 
 %token IDENTIFIER CONSTANT STRING_LITERAL 
-%token LE_OP GE_OP EQ_OP NE_OP DBL_COLON RIGHT_ARROW 
-%token IF THEN ELSE IN CASE OF AND OR NOT OTHERWISE 
+%token SEMI LE_OP GE_OP EQ_OP NE_OP DBL_COLON RIGHT_ARROW 
+%token CASE OF OTHERWISE PRINT 
 
 %start translation_unit
 %%
 
-primary_expression
-	: IDENTIFIER
-	| CONSTANT
-	| STRING_LITERAL
-	| '(' expression ')'
-	;
+expr      :=  simple_expr 
+          |   ( ";" simple_expr )* 
+          |   complex_expr 
+          |   ( ";" complex_expr )*   
+          ; 
 
-postfix_expression
-	: primary_expression 
-    | postfix_expression '[' ']'
-	| postfix_expression '[' expression ']'
-    | postfix_expression '(' argument_expression_list ')' 
-    ;  
+terminal  :=  var_name 
+          |   integer 
+          |   float 
+          |   char 
+          |   string 
+          |   bool
+          |   list  
+          ; 
 
-argument_expression_list
-	: assignment_expression
-	| argument_expression_list ',' assignment_expression
-	;
+list      :=   "[" ( terminal ("," terminal)* ) "]" 
+          ; 
 
-unary_expression
-	: postfix_expression	
-    ;
+simple_expr :=  terminal
+            |   "(" expr ")"
+            |   var_name = simple_exp
+            |   condition
+            |   print_expr
+            |   func_call 
+            |   simple_expr "*" simple_exp
+            |   simple_exp "/" simple_exp
+            |   simple_exp "+" simple_exp
+            |   simple_exp "-" simple_exp 
+            ;   
 
-unary_operator
-	| '*'
-	| '+'
-	| '-'	
-	| '!'
-    ;
+print_expr  :=  PRINT expr ";" 
+            ; 
 
-multiplicative_expression
-	: unary_expression
-	| multiplicative_expression '*' unary_expression
-    | multiplicative_expression '/' unary_expression
-    ;
+type        :=  INT 
+            |   FLOAT 
+            |   CHAR 
+            |   STRING 
+            |   BOOL 
+            |   LIST  
+            |   NONE 
+            ;          
 
-additive_expression
-	: multiplicative_expression
-	| additive_expression '+' multiplicative_expression
-	| additive_expression '-' multiplicative_expression
-    ; 
+complex_expr :=  case_expr 
+             |   func_expr 
+             ;    
 
-relational_expression
-	: additive_expression
-	| relational_expression '<' additive_expression
-	| relational_expression '>' additive_expression
-	| relational_expression LE_OP additive_expression
-	| relational_expression GE_OP additive_expression
-	;
+case_expr    :=  case_head case_body 
+             ; 
 
-equality_expression
-	: relational_expression
-	| equality_expression EQ_OP relational_expression
-	| equality_expression NE_OP relational_expression
-	;
+case_head    :=  CASE var_name OF "\n" 
+             ; 
 
-and_expression
-	: equality_expression
-	| and_expression AND equality_expression
-    ;  
+case_body    :=  ( case_line )+ 
+             ; 
 
-or_expression
-	: equality_expression
-	| or_expression OR equality_expression
-    ;  
+case_line    :=  in_value "->" out_value ";" 
+             ;
 
-assignment_expression
-	: conditional_expression
-	| unary_expression assignment_operator assignment_expression
-	;
+in_value     :=  integer 
+             |   float 
+             |   char 
+             |   string 
+             |   bool
+             |   list  
+             |   OTHERWISE 
+             ;  
+             
+out_value    :=  in_value 
+             |   simple_expr
+             ;   
 
-assignment_operator
-	: '=' 
-    ;  
+func_call    :=  func_name ( var_name )*  ";" 
+             ; 
 
-expression
-	: assignment_expression
-	| expression ',' assignment_expression
-	;
+func_expr    :=  func_decl func_body 
+             ; 
 
-constant_expression
-	: conditional_expression
-    ;  
+func_decl    := func_name "::" ( arg_type )* "->" return_type ";"       
+             ; 
 
-type 
-    : INT 
-    | FLOAT 
-    | CHAR 
-    | STRING 
-    | BOOL 
-    | LIST 
-    ;           
+arg_type     := type ( "->" type )* 
+             ;   
 
-function 
-    : func_declaration func_body 
-    ; 
+return_type  := type 
+             ;  
 
-func_declaration 
-    : func_name DBL_COLON input_type RIGHT_ARROW return_type 
-    ; 
+func_body    := ( simple_expr )+  ";" 
+             |  case_expr  
+             ; 
 
-func_name 
-    : identifier
-    ; 
-
-input_type 
-    : type 
-    | input_type RIGHT_ARROW type
-    ; 
-
-return_type 
-    : type 
-    ;  
-
-func_body 
-    : stmt+ 
-    ; 
-
-parameter
-    : identifier 
-    ; 
-
-parameters 
-    : parameter 
-    | parameters parameter 
-    ; 
-
-guarded_func_body
-    : func_name parameters NL guard_statements
-    ; 
-
-guard_statement 
-    : '|' comparison '=' value 
-    ;    
-
-guard_statements 
-    : guard_statement 
-    | guard_statements NL guard_statement 
-    ; 
-
-
-
-
-
-
-
-
-%%
-#include <stdio.h>
-extern char yytext[];
-extern int column;
-void yyerror(char const *s)
-{
-	fflush(stdout);
-	printf("\n%*s\n%*s\n", column, "^", column, s);
-}
-
-
-
-
-
-
-
-
-
+condition  :=   simple_exp
+            |   condition "and" condition
+            |   condition "or" condition
+            |   "not" condition
+            |   simple_exp ">"  simple_exp
+            |   simple_exp ">=" simple_exp
+            |   simple_exp "<"  simple_exp
+            |   simple_exp "<=" simple_exp
+            |   simple_exp "==" simple_exp
+            |   simple_exp "!=" simple_exp
 
 
 

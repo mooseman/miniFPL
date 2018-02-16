@@ -1,6 +1,6 @@
 
 
-/*  scanner.l  */ 
+/*  miniFPL.l  */ 
 
 digit			[0-9]
 letter          [a-zA-Z_]
@@ -21,16 +21,10 @@ void count(void);
 "/*"			    { comment(); }
 "//"[^\n]*          { /* double-slash comment */   }
 
-"if"                { count();  return(IF);        } 
-"then"              { count();  return(THEN);      } 
-"else"              { count();  return(ELSE);      }  
-"in"                { count();  return(IN);        } 
 "case"              { count();  return(CASE);      } 
 "of"                { count();  return(OF);        }  
-"and"               { count();  return(AND);       }  
-"or"                { count();  return(OR);        }  
-"not"               { count();  return(NOT);       }  
 "otherwise"         { count();  return(OTHERWISE); }  
+"print"             { count();  return(PRINT);     }  
 
 "<="			    { count();  return(LE);    }
 ">="		        { count();  return(GE);    }
