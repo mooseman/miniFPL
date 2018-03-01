@@ -34,24 +34,8 @@ void count(void);
 "/*"			    { comment(); }
 "//"[^\n]*          { /* double-slash comment */   }
 
-"case"              { count();  return(CASE);      } 
-"of"                { count();  return(OF);        }  
-"otherwise"         { count();  return(OTHERWISE); }  
-"print"             { count();  return(PRINT);     }  
-
-"<="			    { count();  return(LE);    }
-">="		        { count();  return(GE);    }
-"=="			    { count();  return(EQ);    }
-"!="			    { count();  return(NE);    }
 ";"                 { count();  return(';');   }
-"="                 { count();  return('='); }
-"<"			        { count();  return('<'); }
-">"                 { count();  return('>'); }
-"+"                 { count();  return('+'); }
-"-"                 { count();  return('-'); }
-"*"                 { count();  return('*'); }
-"/"                 { count();  return('/'); }
-"^"                 { count();  return('^'); }
+"->"                { count();  return("->"); }
 
 [ \t\v\n\f]         { count(); }
 
