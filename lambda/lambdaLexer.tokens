@@ -1,0 +1,12 @@
+T__0=1
+LPAREN=2
+BACKSLASH=3
+RPAREN=4
+OP=5
+LETTER=6
+NUMBER=7
+WS=8
+'->'=1
+'('=2
+'\\'=3
+')'=4

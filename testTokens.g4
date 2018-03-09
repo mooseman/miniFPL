@@ -1,20 +1,24 @@
-lexer grammar miniFPLTokens; // note "lexer grammar"
+
+
+lexer grammar testTokens; // note "lexer grammar"
 
 // operators
-MUL : '*' ;
-DIV : '/' ;
-ADD : '+' ;
-SUB : '-' ;
-EXP : '^' ;
-MOD : 'MOD' ;
+Op  : '*' 
+    | '/' 
+    | '+' 
+    | '-' 
+    | '^' 
+;
+
 
 // logical
-NEQ : '<>' ;
-GTE : '>=' ;
-LTE : '<=' ;
-GT  : '>' ;
-LT  : '<' ;
-EQ  : '=' ;
+RelOp : '!='
+      | '=='  
+      | '>=' 
+      | '<=' 
+      | '>' 
+      | '<' 
+;
 
 // relational
 AND : 'AND' | 'and' ;
@@ -25,10 +29,9 @@ NOT : 'NOT' | 'not' ;
 COMMA  : ',' ;
 LPAREN : '(' ;
 RPAREN : ')' ;
+EOL    : ( '\r'?'\n' ) ;  
 
 // functions
-LEN : 'LEN' | 'len' ;
-VAL : 'VAL' | 'val' ;
 
 
 // keywords
